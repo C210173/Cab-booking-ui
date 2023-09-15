@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import SearchResultCard from "./SearchResultCard";
 
@@ -8,7 +10,7 @@ const SearchResult = ({
   longitude_key,
 }) => {
   return (
-    <div className="absolute top-10 left-0 right-0 z-10 bg-white rounded-md p-2 border max-h-[50vh] overflow-y-auto shadow-md">
+    <div className="absolute top-10 left-0 right-0 z-10 bg-white rounded-md p-2 border max-h-[50vh]  overflow-y-scroll shadow-md">
       {[1, 1, 1, 1, 1, 1, 1, 1].map((item) => (
         <>
           <SearchResultCard

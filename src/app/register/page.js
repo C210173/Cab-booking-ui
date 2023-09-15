@@ -1,13 +1,12 @@
 "use client";
-
 import React from "react";
 import Layout from "../components/user/Layout/Layout";
-import BookRide from "./BookRide";
+import Register from "./Register";
 
 const page = () => {
   return (
     <div>
-      <Layout children={<BookRide />} />
+      <Layout children={<Register />}></Layout>
     </div>
   );
 };

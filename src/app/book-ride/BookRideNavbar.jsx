@@ -1,3 +1,4 @@
+"use client";
 import {
   AppBar,
   Avatar,
@@ -8,15 +9,26 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { deepOrange } from "@mui/material/colors";
 import { drawerList } from "./DrawerList";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "@/Redux/Auth/Action";
+import { useRouter } from "next/navigation";
 
 const BookRideNavbar = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const jwt = localStorage.getItem("jwt");
+  const { auth } = useSelector((store) => store);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const handlerSidebarClose = () => setSidebarOpen(false);
   const handlerSidebarOpen = () => setSidebarOpen(true);
+
+  useEffect(() => {
+    dispatch(getUser(jwt));
+  }, []);
   return (
     <Box>
       <AppBar sx={{ backgroundColor: "#120E43" }} position="static">
@@ -34,13 +46,13 @@ const BookRideNavbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Hao Cad
           </Typography>
-          {true ? (
+          {auth.user?.fullName ? (
             <Avatar
               onClick={() => router.push("/profile")}
               className="cursor-pointer"
               sx={{ bgcolor: deepOrange[500] }}
             >
-              A
+              {auth.user?.fullName[0]}
             </Avatar>
           ) : (
             <Button onClick={() => router.push("login")} color="inherit">
